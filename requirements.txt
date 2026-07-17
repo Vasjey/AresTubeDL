@@ -1,0 +1,40 @@
+# ============================================================
+# requirements.txt
+# Target: Windows 7 SP1 (32-bit) / Python 3.8.10
+# ============================================================
+# IMPORTANTE:
+# - Python 3.8.10 es la ULTIMA version oficial de python.org con
+#   instalador para Windows 7. No subir a 3.9+ en esta maquina.
+#
+# - yt-dlp (oficial y el fork nicolaasjan/yt-dlp) quedaron
+#   descartados: ambos requieren Python 3.9+ desde finales de 2024,
+#   y no hay forma de correr un Python 3.9+ nativo en Windows 7 (esa
+#   version de Python tambien elimino el soporte para Windows 7).
+#
+# - En su lugar se usa "pytubefix": libreria 100% Python puro (sin
+#   binarios nativos, sin subprocesos externos), con soporte OFICIAL
+#   para Python 3.7+ (funciona sin problemas en Python 3.8.10 /
+#   Windows 7 32-bit). Se actualiza sola via pip al iniciar la app
+#   (ver updater/pytubefix_updater.py), porque YouTube cambia seguido
+#   y conviene tener siempre la version mas nueva.
+#
+# - La conversion a MP3 real SIGUE necesitando ffmpeg (pytubefix no
+#   convierte codecs, solo descarga el audio original en AAC/Opus).
+#
+# - VLC de 32 bits debe estar instalado aparte en el sistema
+#   (python-vlc solo es el binding, no incluye VLC).
+# - pywin32 se usa para deteccion de unidades USB (Fase 3) y para
+#   utilidades nativas de Windows (rutas de Escritorio, etc).
+# - Pillow es necesario para decodificar las miniaturas de YouTube
+#   (llegan en JPEG/WebP) y mostrarlas en Tkinter via ImageTk.
+# ============================================================
+
+pytubefix==9.3.0
+python-vlc==3.0.20123
+requests
+pywin32==306
+packaging==23.2
+Pillow==10.4.0
+
+# Empaquetado a .exe standalone (para distribuir sin instalar Python)
+pyinstaller==5.13.2
